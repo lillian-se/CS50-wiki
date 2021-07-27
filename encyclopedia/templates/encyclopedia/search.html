@@ -1,0 +1,27 @@
+{% extends "encyclopedia/layout.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock %}
+
+{% block body %}
+  {% if q %}
+    <h1>You searched for {{ q }}</h1>
+  {% else %}
+    <h1>You forgot to search..</h1>
+  {% endif %}
+  {% if  res  %}
+    {% for i in res  %}
+      <a href="{% url 'get_page' title=i %}"> <h2>{{ i }}</h2></a>
+    {% endfor %}
+  {% else %}
+  <h3>There are no results for {{ q }} perhaps some other article can interest you</h3>
+  <ul>
+    {% for entry in entries %}
+     
+       <a href="{% url 'get_page' title=entry %}"><li>{{ entry }}</li></a>
+    {% endfor %}
+</ul>
+  {% endif %}
+{% endblock %}
+
